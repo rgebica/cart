@@ -4,15 +4,15 @@ interface CartOperation {
 
     int PRODUCTS_LIMIT = 500;
 
-    boolean addProducts(String productName, int price, int quantity);
+    boolean addProducts(String productName, Integer price, Integer quantity);
 
-    boolean deleteProducts(String productName, int quantity);
+    boolean deleteProducts(String productName, Integer quantity);
 
-    int getQuantityOfProduct(String productName);
+    Integer getQuantityOfProduct(String productName);
 
-    int getSumProductsPrices();
+    Integer getSumProductsPrices();
 
-    int getProductPrice(String productName);
+    Integer getProductPrice(String productName);
 
     List<String> getProductsNames();
 }

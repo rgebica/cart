@@ -27,9 +27,8 @@ class CartTest extends Specification {
         productName || price || quantity || expected
         "Apple"     || 123   || -1       || false
         "Milka"     || -123  || 0        || false
-        "Orange"    || null  || null     || false
-        ""          || -123  || null     || false
-        null        || 0     || null     || false
+        null        || null  || null     || false
+        "null"      || -13   || null     || false
     }
 
 }
