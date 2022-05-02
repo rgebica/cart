@@ -31,4 +31,49 @@ class CartTest extends Specification {
         "null"      || -13   || null     || false
     }
 
+    def "shouldDeleteProducts"() {
+
+        given:
+        def shoppingCart = new Cart()
+        shoppingCart.addProducts("Apple", 123, 32)
+
+        expect:
+        shoppingCart.deleteProducts(productName, quantity) == expected
+
+        where:
+        productName | quantity | expected
+        "Apple"     | 1        | true
+    }
+
+    def "shouldGetQuantityOfProduct"() {
+        given:
+        def shoppingCart = new Cart()
+        shoppingCart.addProducts("Apple", 123, 12)
+        shoppingCart.addProducts("Milk", 321, 15)
+
+        expect:
+        shoppingCart.getQuantityOfProduct(productName) == expected
+
+        where:
+        productName | expected
+        "Apple"     | 12
+        "Milk"      | 15
+    }
+
+    def "shouldNotGetQuantityOfProduct"() {
+        given:
+        def shoppingCart = new Cart()
+        shoppingCart.addProducts("Apple", 123, 12)
+        shoppingCart.addProducts("Milk", 321, 15)
+
+        expect:
+        shoppingCart.getQuantityOfProduct(productName) == expected
+
+        where:
+        productName | expected
+        "Coffee"    | 0
+        "Tea"       | 0
+        null        | 0
+    }
+
 }
