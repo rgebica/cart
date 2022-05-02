@@ -30,7 +30,7 @@ public class Cart implements CartOperation {
     }
 
     public boolean deleteProducts(String productName, Integer quantity) {
-        if (quantity <= 0) {
+        if (quantity == null || quantity <= 0) {
             return false;
         }
 
