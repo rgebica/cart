@@ -70,4 +70,13 @@ class CartTest extends Specification {
         null        | 0
     }
 
+    def "shouldGetSumProductsPrices"() {
+        given:
+        def shoppingCart = new Cart()
+        shoppingCart.addProducts("Apple", 5, 3)
+        shoppingCart.addProducts('Tea', 10, 1)
+
+        expect:
+        shoppingCart.getSumProductsPrices() == 25
+    }
 }
