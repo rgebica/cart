@@ -70,7 +70,7 @@ class CartTest extends Specification {
         null        | 0
     }
 
-    def "shouldGetSumProductsPrices"() {
+    def "shouldGetSumDifferentProductsPrices"() {
         given:
         def shoppingCart = new Cart()
         shoppingCart.addProducts("Apple", 5, 3)
@@ -79,4 +79,31 @@ class CartTest extends Specification {
         expect:
         shoppingCart.getSumProductsPrices() == 25
     }
+
+    def "shouldGetSumProductsPricesWithSameProduct"() {
+        given:
+        def shoppingCart = new Cart()
+        shoppingCart.addProducts("Apple", 5, 3)
+        shoppingCart.addProducts('Tea', 10, 1)
+        shoppingCart.addProducts('Tea', 15, 3)
+
+        expect:
+        shoppingCart.getSumProductsPrices() == 25
+    }
+
+    def "shouldGetProductPrice"() {
+        given:
+        def shoppingCart = new Cart()
+        shoppingCart.addProducts("Apple", 5, 4)
+        shoppingCart.addProducts("Milk", 10, 2)
+
+        expect:
+        shoppingCart.getProductPrice(productName) == expected
+
+        where:
+        productName | expected
+        "Apple"     | 20
+        "Milk"      | 20
+    }
+
 }
