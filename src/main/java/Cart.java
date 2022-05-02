@@ -53,12 +53,21 @@ public class Cart implements CartOperation {
                 .orElse(NO_PRODUCT);
     }
 
+    @Override
     public Integer getSumProductsPrices() {
-        return 0;
+
+        return products.stream()
+                .map(product -> product.getQuantity() * product.getPrice())
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
+    @Override
     public Integer getProductPrice(String productName) {
-        return 0;
+        Optional<Product> product = getProduct(productName);
+
+        return product.map(p -> p.getPrice() * p.getQuantity())
+                .orElse(NO_PRODUCT);
     }
 
     public List<String> getProductsNames() {
