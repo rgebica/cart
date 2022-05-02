@@ -106,4 +106,34 @@ class CartTest extends Specification {
         "Milk"      | 20
     }
 
+    def "shouldGetProductsNames"() {
+        given:
+        def shoppingCart = new Cart()
+        shoppingCart.addProducts("Apple", 5, 4)
+        shoppingCart.addProducts("Milk", 10, 2)
+        shoppingCart.addProducts("Tea", 5, 4)
+        shoppingCart.addProducts("Coffee", 10, 2)
+
+        when:
+        List<String> shoppingCartList = shoppingCart.getProductsNames()
+
+        then:
+        shoppingCartList.get(0) == "Apple"
+        shoppingCartList.get(1) == "Milk"
+        shoppingCartList.get(2) == "Tea"
+        shoppingCartList.get(3) == "Coffee"
+    }
+
+    def "shouldNotGetProductsNames"() {
+        given:
+        def shoppingCart = new Cart()
+
+        when:
+        List<String> shoppingCartList = shoppingCart.getProductsNames()
+
+        then:
+        shoppingCartList.size() == 0
+
+    }
+
 }
