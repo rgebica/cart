@@ -29,6 +29,7 @@ class CartTest extends Specification {
         "Milka"     || -123  || 0        || false
         null        || null  || null     || false
         "null"      || -13   || null     || false
+        "null"      || -13   || null     || false
     }
 
     def "shouldDeleteProducts"() {
@@ -88,7 +89,7 @@ class CartTest extends Specification {
         shoppingCart.addProducts('Tea', 15, 3)
 
         expect:
-        shoppingCart.getSumProductsPrices() == 25
+        shoppingCart.getSumProductsPrices() == 70
     }
 
     def "shouldGetProductPrice"() {
