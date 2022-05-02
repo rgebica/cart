@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Cart implements CartOperation {
 
     private final List<Product> products = new ArrayList<>();
+    private final int NO_PRODUCT = 0;
 
     public boolean addProducts(String productName, Integer price, Integer quantity) {
         if (productName == null || price == null || quantity == null) {
@@ -26,11 +28,29 @@ public class Cart implements CartOperation {
     }
 
     public boolean deleteProducts(String productName, Integer quantity) {
-        return false;
+        if (quantity <= 0) {
+            return false;
+        }
+
+        Optional<Product> product = getProduct(productName);
+
+        return product
+                .map(p -> {
+                    if (quantity > p.getQuantity()) {
+                        return false;
+                    } else {
+                        p.setQuantity(p.getQuantity() - quantity);
+                    }
+                    return true;
+                }).orElse(false);
     }
 
     public Integer getQuantityOfProduct(String productName) {
-        return 0;
+        Optional<Product> product = getProduct(productName);
+
+        return product
+                .map(Product::getQuantity)
+                .orElse(NO_PRODUCT);
     }
 
     public Integer getSumProductsPrices() {
@@ -54,5 +74,11 @@ public class Cart implements CartOperation {
     private boolean isAlreadyInCart(String productName) {
         return products.stream()
                 .anyMatch(product -> product.getProductName().equals(productName));
+    }
+
+    private Optional<Product> getProduct(String productName) {
+        return products.stream()
+                .filter(p -> p.getProductName().equals(productName))
+                .findAny();
     }
 }

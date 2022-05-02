@@ -32,7 +32,6 @@ class CartTest extends Specification {
     }
 
     def "shouldDeleteProducts"() {
-
         given:
         def shoppingCart = new Cart()
         shoppingCart.addProducts("Apple", 123, 32)
@@ -52,12 +51,7 @@ class CartTest extends Specification {
         shoppingCart.addProducts("Milk", 321, 15)
 
         expect:
-        shoppingCart.getQuantityOfProduct(productName) == expected
-
-        where:
-        productName | expected
-        "Apple"     | 12
-        "Milk"      | 15
+        shoppingCart.getQuantityOfProduct("Apple") == 12
     }
 
     def "shouldNotGetQuantityOfProduct"() {
