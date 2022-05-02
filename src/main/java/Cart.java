@@ -57,6 +57,9 @@ public class Cart implements CartOperation {
 
     @Override
     public Integer getSumProductsPrices() {
+        if (products.size() < 0) {
+            return 0;
+        }
 
         return products.stream()
                 .map(product -> product.getQuantity() * product.getPrice())
