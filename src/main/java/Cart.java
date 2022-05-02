@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Cart implements CartOperation {
 
@@ -71,7 +73,12 @@ public class Cart implements CartOperation {
     }
 
     public List<String> getProductsNames() {
-        return null;
+        Optional.of(this.products)
+                .orElse(Collections.emptyList());
+
+        return products.stream()
+                .map(Product::getProductName)
+                .collect(Collectors.toList());
     }
 
     public Integer getCurrentQuantity() {
